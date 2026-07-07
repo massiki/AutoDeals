@@ -1,112 +1,114 @@
-# ERD AutoDeals – Car Dealership Management System
+# ERD AutoDeals — Car Dealership Management System
 
 ## Tabel
 
-### users
+### cars
 
-| Field | Type |
-|---|---|
-| id | bigint |
-| name | string |
-| email | string |
-| password | string |
-| gender | string |
-| phone | string |
-| photo | string |
-| created_at | timestamp |
-| updated_at | timestamp |
-
----
-
-### court_bookings
-
-| Field | Type |
-|---|---|
-| id | bigint |
-| court_id | int |
-| user_id | int |
-| total_hours | int |
-| total_tax_amount | int |
-| price_per_hour_amount | int |
-| grand_total_amount | int |
-| status | string |
-| proot_of_payment | string |
-| start_at | datetime |
-| end_at | datetime |
-| created_at | timestamp |
-| updated_at | timestamp |
----
-
-### court_booking_stots
-
-| Field | Type |
-|---|---|
-| id | bigint |
-| slot_at | datetime |
-| court_id | int |
-| court_booking_id | int |
-| status | string |
-| created_at | timestamp |
-| updated_at | timestamp |
+| Field | Type | Constraints |
+|---|---|---|
+| id | bigint | PK, Auto Increment |
+| stock_code | varchar(255) | UNIQUE, Auto-generated (`MOB-XXXX`) |
+| brand | varchar(255) | |
+| model | varchar(255) | |
+| year | integer | ≤ tahun sekarang |
+| price | decimal(15,2) | ≥ 0 |
+| kilometer | integer | |
+| color | varchar(255) | |
+| transmission | varchar(255) | Enum: Manual, Automatic, CVT |
+| fuel_type | varchar(255) | Enum: Bensin, Diesel, Hybrid, Electric |
+| engine_cc | integer | NULLABLE |
+| plate_number | varchar(255) | NULLABLE |
+| condition | varchar(255) | Enum: New, Excellent, Good, Fair, Poor |
+| vin | varchar(255) | UNIQUE, NULLABLE |
+| description | text | NULLABLE |
+| photos | json | NULLABLE, max 10 |
+| status | varchar(255) | Default 'Available'. Enum: Available, Reserved, Sold |
+| created_at | timestamp | |
+| updated_at | timestamp | |
 
 ---
 
-### courts
+### inquiries
 
-| Field | Type |
-|---|---|
-| id | bigint |
-| name | string |
-| about | text |
-| thumbnail | string |
-| category_id | int |
-| city_id | int |
-| photos | json |
-| features | json |
-| phone | string |
-| material | string |
-| price | int |
-| status | string |
-| address | text |
-| created_at | timestamp |
-| updated_at | timestamp |
+| Field | Type | Constraints |
+|---|---|---|
+| id | bigint | PK, Auto Increment |
+| car_id | bigint | FK → cars.id, NULLABLE, ON DELETE SET NULL |
+| buyer_name | varchar(255) | |
+| phone | varchar(255) | |
+| email | varchar(255) | |
+| inquiry_date | datetime | |
+| offer_price | decimal(15,2) | NULLABLE |
+| status | varchar(255) | Default 'Pending'. Enum: Pending, Test Drive, Approved, Rejected |
+| notes | text | NULLABLE |
+| created_at | timestamp | |
+| updated_at | timestamp | |
 
 ---
 
-### cities
+## Relasi
 
-| Field | Type |
-|---|---|
-| id | bigint |
-| name | string |
-| photo | string |
-| created_at | timestamp |
-| updated_at | timestamp |
+```
+cars 1────N inquiries
+(Car has many inquiries)
+(Inquiry belongs to Car)
+```
 
----
+## Diagram Relasi
 
-### categories
+```
+┌──────────────┐       ┌────────────────┐
+│     cars     │       │   inquiries    │
+├──────────────┤       ├────────────────┤
+│ id (PK)      │◄──────│ car_id (FK)    │
+│ stock_code   │       │ id (PK)        │
+│ brand        │       │ buyer_name     │
+│ model        │       │ phone          │
+│ year         │       │ email          │
+│ price        │       │ inquiry_date   │
+│ kilometer    │       │ offer_price    │
+│ color        │       │ status         │
+│ transmission │       │ notes          │
+│ fuel_type    │       └────────────────┘
+│ engine_cc    │
+│ plate_number │
+│ condition    │
+│ vin          │
+│ description  │
+│ photos       │
+│ status       │
+│ created_at   │
+│ updated_at   │
+└──────────────┘
+```
 
-| Field | Type |
-|---|---|
-| id | bigint |
-| name | string |
-| photo | string |
-| created_at | timestamp |
-| updated_at | timestamp |
+## Enum Values
 
----
+### Car Status
+- `Available` — Tersedia untuk dijual
+- `Reserved` — Sudah ada DP / reservasi
+- `Sold` — Terjual
 
-### court_time_slots
+### Car Condition
+- `New` — Baru (0 km)
+- `Excellent` — Kondisi sangat baik
+- `Good` — Kondisi baik
+- `Fair` — Kondisi cukup
+- `Poor` — Kondisi perlu perbaikan
 
-| Field | Type |
-|---|---|
-| id | bigint |
-| court_id | int |
-| day_of_week | int |
-| start_time | time |
-| end_time | time |
-| created_at | timestamp |
-| updated_at | timestamp |
+### Transmission
+- `Manual` — Transmisi manual
+- `Automatic` — Transmisi otomatis konvensional
+- `CVT` — Continuously Variable Transmission
 
----
+### Fuel Type
+- `Bensin` — Bensin (pertalite/pertamax)
+- `Diesel` — Solar
+- `Hybrid` — Hybrid (bensin + listrik)
+- `Electric` — Listrik murni
+
+### Inquiry Status
+- `Pending` — Belum diproses
+- `Test Drive` — Jadwal test drive
+- `Approved` — Disetujui / deal
+- `Rejected` — Ditolak / batal
