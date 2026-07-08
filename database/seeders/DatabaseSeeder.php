@@ -13,7 +13,14 @@ class DatabaseSeeder extends Seeder
     {
         User::factory()->create([
             'name' => 'Admin AutoDeals',
-            'email' => 'admin@autodeals.com',
+            'email' => 'admin@gmail.com',
+            'role' => 'admin',
+        ]);
+
+        User::factory()->create([
+            'name' => 'User AutoDeals',
+            'email' => 'user@gmail.com',
+            'role' => 'user',
         ]);
 
         $cars = Car::factory(30)->create();
