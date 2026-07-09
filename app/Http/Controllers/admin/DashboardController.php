@@ -18,8 +18,8 @@ class DashboardController extends Controller
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('stock_code', 'like', "%{$search}%")
-                      ->orWhere('brand', 'like', "%{$search}%")
-                      ->orWhere('model', 'like', "%{$search}%");
+                        ->orWhere('brand', 'like', "%{$search}%")
+                        ->orWhere('model', 'like', "%{$search}%");
                 });
             })
             ->when($brand, function ($query, $brand) {
@@ -43,7 +43,7 @@ class DashboardController extends Controller
 
         $brands = Car::select('brand')->distinct()->orderBy('brand')->pluck('brand');
 
-        return view('dashboard', compact('cars', 'stats', 'brands', 'search', 'brand'));
+        return view('admin.dashboard', compact('cars', 'stats', 'brands', 'search', 'brand'));
     }
 
     public static function carPhotoUrl($car): string

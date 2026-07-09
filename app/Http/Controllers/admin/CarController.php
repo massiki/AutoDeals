@@ -15,7 +15,7 @@ class CarController extends Controller
         $nextId = $lastCar ? $lastCar->id + 1 : 1;
         $stockCode = 'AUT-' . date('Y') . '-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
 
-        return view('car.create', compact('stockCode'));
+        return view('admin.car.create', compact('stockCode'));
     }
 
     public function store(Request $request)
@@ -58,7 +58,7 @@ class CarController extends Controller
 
     public function edit(Car $car)
     {
-        return view('car.edit', compact('car'));
+        return view('admin.car.edit', compact('car'));
     }
 
     public function update(Request $request, Car $car)

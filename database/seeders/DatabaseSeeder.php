@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'User AutoDeals',
             'email' => 'user@gmail.com',
-            'role' => 'user',
+            'role' => 'customer',
         ]);
 
         $cars = Car::factory(30)->create();
