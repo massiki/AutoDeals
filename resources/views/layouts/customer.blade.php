@@ -157,6 +157,26 @@
                 class="font-medium text-secondary group-[.active]:font-bold group-[.active]:text-foreground group-hover:text-foreground transition-all duration-300">Dashboard</span>
             </div>
           </a>
+          <a href="{{ route('customer.cars') }}"
+            class="group {{ $active === 'cars' ? 'active' : '' }} cursor-pointer">
+            <div
+              class="flex items-center rounded-2xl p-4 gap-3 bg-white group-[.active]:bg-muted group-hover:bg-muted transition-all duration-300">
+              <i data-lucide="car-front"
+                class="size-6 text-secondary group-[.active]:text-primary group-hover:text-foreground transition-all duration-300"></i>
+              <span
+                class="font-medium text-secondary group-[.active]:font-bold group-[.active]:text-foreground group-hover:text-foreground transition-all duration-300">Cars</span>
+            </div>
+          </a>
+          <a href="{{ route('customer.inquiries') }}"
+            class="group {{ $active === 'inquiries' ? 'active' : '' }} cursor-pointer">
+            <div
+              class="flex items-center rounded-2xl p-4 gap-3 bg-white group-[.active]:bg-muted group-hover:bg-muted transition-all duration-300">
+              <i data-lucide="message-square"
+                class="size-6 text-secondary group-[.active]:text-primary group-hover:text-foreground transition-all duration-300"></i>
+              <span
+                class="font-medium text-secondary group-[.active]:font-bold group-[.active]:text-foreground group-hover:text-foreground transition-all duration-300">My Inquiries</span>
+            </div>
+          </a>
         </div>
       </div>
     </div>
