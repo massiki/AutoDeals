@@ -175,13 +175,13 @@
                 class="font-medium text-secondary group-[.active]:font-bold group-[.active]:text-foreground group-hover:text-foreground transition-all duration-300">Users</span>
             </div>
           </a>
-          <a href="#" class="group cursor-pointer" onclick="openPageNotFoundModal(event)">
+          <a href="{{ route('admin.inquiries.index') }}" class="group {{ $active === 'inquiries' ? 'active' : '' }} cursor-pointer">
             <div
               class="flex items-center rounded-2xl p-4 gap-3 bg-white group-[.active]:bg-muted group-hover:bg-muted transition-all duration-300">
-              <i data-lucide="dollar-sign"
+              <i data-lucide="message-square"
                 class="size-6 text-secondary group-[.active]:text-primary group-hover:text-foreground transition-all duration-300"></i>
               <span
-                class="font-medium text-secondary group-[.active]:font-bold group-[.active]:text-foreground group-hover:text-foreground transition-all duration-300">Sales</span>
+                class="font-medium text-secondary group-[.active]:font-bold group-[.active]:text-foreground group-hover:text-foreground transition-all duration-300">Inquiries</span>
             </div>
           </a>
         </div>
