@@ -180,7 +180,7 @@
         <!-- Footer Links -->
         <div class="mt-10 text-center">
           <p class="text-sm text-secondary font-medium">
-            Need access? <a href="#" class="text-primary font-semibold hover:underline">Contact Administrator</a>
+            Don't have an account? <a href="{{ route('register') }}" class="text-primary font-semibold hover:underline">Create Account</a>
           </p>
         </div>
       </div>

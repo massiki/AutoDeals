@@ -173,7 +173,7 @@
                 class="size-10 rounded-full object-cover ring-2 ring-white shadow-sm shrink-0">
               <div class="min-w-0 text-left">
                 <p class="text-sm font-bold text-foreground truncate">{{ Auth::user()->name }}</p>
-                <p class="text-xs font-medium text-secondary truncate">Administrator</p>
+                <p class="text-xs font-medium text-secondary truncate">{{ ucfirst(Auth::user()->role) }}</p>
               </div>
             </div>
             <div
